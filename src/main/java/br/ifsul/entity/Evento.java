@@ -14,6 +14,7 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -45,4 +46,6 @@ public class Evento {
 	
 	@ManyToMany(mappedBy = "evento")
 	private Set<Deputado> deputados = new HashSet<>(); 	
+	
+	
 }

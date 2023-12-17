@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import br.ifsul.entity.Deputado;
+import br.ifsul.entity.Evento;
 import br.ifsul.entity.valueobjects.ListaDeputado;
 import br.ifsul.repository.DeputadoRepository;
 import lombok.Getter;
@@ -38,5 +39,20 @@ public class DeputadoService {
 		return deputadoRepo.findById(id);
 	}
 	
+	public List<Evento> getEventoByDeputadoId(Long id){
+		return deputadoRepo.findEventoById(id);
+	}
+	
+	public void cadastrarDeputadoEvento(Long id, Evento evento) {
+		Deputado deputados = deputadoRepo.findDeputadoById(id);
+		deputados.getEvento().add(evento);
+		deputadoRepo.save(deputados);
+	}
+	
+	public void excluirEventoDeputado(Long id, Evento evento) {
+		Deputado deputados = deputadoRepo.findDeputadoById(id);
+		deputados.getEvento().remove(evento);
+		deputadoRepo.save(deputados);
+	}
 	
 }
