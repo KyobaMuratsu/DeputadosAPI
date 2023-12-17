@@ -10,6 +10,7 @@ import org.springframework.web.client.RestTemplate;
 
 import br.ifsul.entity.Deputado;
 import br.ifsul.entity.Evento;
+import br.ifsul.entity.valueobjects.EventoDto;
 import br.ifsul.entity.valueobjects.ListaDeputado;
 import br.ifsul.repository.DeputadoRepository;
 import lombok.Getter;
@@ -54,5 +55,6 @@ public class DeputadoService {
 		deputados.getEvento().remove(evento);
 		deputadoRepo.save(deputados);
 	}
+	
 	
 }

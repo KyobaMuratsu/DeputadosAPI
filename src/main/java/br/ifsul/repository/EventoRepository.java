@@ -8,5 +8,5 @@ import br.ifsul.entity.Evento;
 
 public interface EventoRepository extends JpaRepository<Evento, Long> {
 	
-	
+	public Evento findEventoById(Long id); 
 }
