@@ -38,16 +38,12 @@ public class ApiController {
 	private DeputadoRepository deputadoRepo;
 	
 	@GetMapping(value = "/salvarDeputadoeEvento", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ListaDeputado> getData() {
+	public ResponseEntity<String> getData() {
 		ListaDeputado deputadoData = deputadoService.getDeputadosDados();
 		ListaEvento eventoData = eventoService.getEventoDados();
 		eventoRepo.saveAll(eventoData.getDados());
 		deputadoRepo.saveAll(deputadoData.getDados());
-		return ResponseEntity.ok(deputadoData);
+		return ResponseEntity.ok("Seu banco está com As informações");
 	}
-	
-	
-	
-	
 	
 }
