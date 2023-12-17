@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<title>Deputados - Projeto Eventos</title>
+		<title>Página Inicial - Projeto Eventos</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="stylesheet" type="text/css" media="screen" href="main.css" />
 		<script src="main.js"></script>
@@ -15,43 +15,51 @@
 		/>
 	</head>
 	<body>
-		<h1>API Deputados!</h1>
-		<p>Bem-vindo à página inicial do cadastro de eventos da API de Deputados</p>
-		<br />
-		<h2>Lista de Deputados</h2>
-
-		<table>
-				<th>
-					ID
-				</th>
-				<th>
-					Nome
-				</th>
-				<th>
-					Partido
-				</th>
-				<th>
-					Estado
-				</th>
-				<th>
-					Legislatura
-				</th>
-				<th>
-					Email
-				</th>
-			</thead>
-
-			<tbody>
-				<tr data-th-each="item : ${deputados}">
-					<td th:text="${item.id}">...</td>
-					<td th:text="${item.nome}">...</td>
-                    <td><img src="${item.urlFoto}"/></td>
-					<td th:text="${item.siglaPartido}">...</td>
-					<td th:text="${item.siglaUf}">...</td>
-					<td th:text="${item.idLegislatura}">...</td>
-					<td th:text="${item.email}">...</td>
-				</tr>
-			</tbody>
-		</table>
+        <header>
+            <h1>API Deputados!</h1>
+            <p>Bem-vindo à página inicial do cadastro de eventos da API de Deputados</p>
+        </header>
+        <br />
+        <h2>Lista de Deputados</h2>
+        <main class="d-flex flex-row align-itens-center justify-content-center">
+    
+            <table>
+                    <th>
+                        ID
+                    </th>
+                    <th>
+                        Nome
+                    </th>
+                    <th>
+                        
+                    </th>
+                    <th>
+                        Partido
+                    </th>
+                    <th>
+                        Estado
+                    </th>
+                    <th>
+                        Legislatura
+                    </th>
+                    <th>
+                        Email
+                    </th>
+                </thead>
+    
+                <tbody>
+                    <tr data-th-each="item : ${deputados}">
+                        <td th:text="${item.id}">...</td>
+                        <td th:text="${item.nome}">...</td>
+                        <td><img th:src="${item.urlFoto}" style="width:30px;height:40px;"/></td>
+                        <td th:text="${item.siglaPartido}">...</td>
+                        <td th:text="${item.siglaUf}">...</td>
+                        <td th:text="${item.idLegislatura}">...</td>
+                        <td th:text="${item.email}">...</td>
+                        <td><a th:href="${'/deputado/' + {item.id}}">Ir para página do deputado</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </main>
 	</body>
 </html>
