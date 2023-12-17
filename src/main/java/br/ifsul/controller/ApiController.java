@@ -20,11 +20,15 @@ public class ApiController {
 	@Autowired
 	private DeputadoRepository deputadoRepo;
 	
-	@GetMapping(value = "/dados", produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<ListarDeputado> getData() {
 		ListarDeputado data = apiService.getDados();
 		deputadoRepo.saveAll(data.getDados());
 		return ResponseEntity.ok(data);
 	}
+	
+	
+	
+	
 	
 }
