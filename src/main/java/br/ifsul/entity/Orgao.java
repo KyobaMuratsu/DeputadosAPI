@@ -1,7 +1,11 @@
 package br.ifsul.entity;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,8 +16,10 @@ import lombok.Setter;
 public class Orgao {
 	
 	@Id
-	private Long id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long dataId;
 	
+	private Long id;
 	private String uri;
 	private String sigla;
 	private String nome;
@@ -23,7 +29,8 @@ public class Orgao {
 	private String nomePublicacao;
 	private String nomeResumido;
 	
-	@OneToOne(mappedBy = "orgaos")
+	@ManyToOne
+	@JoinColumn(name = "evento_id", referencedColumnName = "id")
 	private Evento evento;
 	
 }

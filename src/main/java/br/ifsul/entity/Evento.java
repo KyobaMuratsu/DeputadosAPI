@@ -1,13 +1,14 @@
 package br.ifsul.entity;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import lombok.Getter;
 import lombok.Setter;
@@ -25,12 +26,14 @@ public class Evento {
 	private LocalDateTime dataHoraFim;
 	private String situacao;
 	private String descricaoTipo;
+	
+	@Column(columnDefinition = "VARCHAR(2000)")
 	private String descricao;
+	
 	private String urlRegistro;
 	
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "orgao_id", referencedColumnName = "id")
-	private Orgao orgaos;
+	@OneToMany(mappedBy = "evento", cascade = CascadeType.ALL)
+	private List<Orgao> orgaos;
 	
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "localcamara_id", referencedColumnName = "id")
