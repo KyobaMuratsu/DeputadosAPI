@@ -1,4 +1,4 @@
-package br.ifsul.service;
+package br.ifsul.entity.valueobjects;
 
 import java.util.List;
 
@@ -8,12 +8,8 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class ListarDeputado {
+public class ListaDeputado {
 
 	private List<Deputado> dados;
-	
-	public List<Deputado> getDados(){
-		return dados;
-	}
 	
 }

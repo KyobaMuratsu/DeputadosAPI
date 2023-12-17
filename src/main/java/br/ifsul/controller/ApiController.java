@@ -7,24 +7,27 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.ifsul.entity.valueobjects.ListaDeputado;
 import br.ifsul.repository.DeputadoRepository;
 import br.ifsul.service.ApiService;
-import br.ifsul.service.ListarDeputado;
+import br.ifsul.service.DeputadoService;
+import br.ifsul.service.EventoService;
 
 @RestController
 public class ApiController {
 	
 	@Autowired
-	private ApiService apiService;
+	private DeputadoService deputadoService;
+	
 	
 	@Autowired
 	private DeputadoRepository deputadoRepo;
 	
-	@GetMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ListarDeputado> getData() {
-		ListarDeputado data = apiService.getDados();
-		deputadoRepo.saveAll(data.getDados());
-		return ResponseEntity.ok(data);
+	@GetMapping(value = "/salvarDeputadoeEvento", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ListaDeputado> getData() {
+		ListaDeputado deputadoData = deputadoService.getDeputadosDados();
+		deputadoRepo.saveAll(deputadoData.getDados());
+		return ResponseEntity.ok(deputadoData);
 	}
 	
 	

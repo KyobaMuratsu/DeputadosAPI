@@ -8,11 +8,13 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class ListarEvento {
+public class EventoService {
 
 	private List<Evento> dados;
 	
-	public List<Evento> getDados(){
+	public List<Evento> listarEvento(){
 		return dados;
 	}
+	
+	
 }

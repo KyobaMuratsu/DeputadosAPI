@@ -14,9 +14,9 @@ public class ApiService {
 	@Autowired
 	private RestTemplate restTemplate;
 	
-	public ListarDeputado getDados() {
-		ResponseEntity<ListarDeputado> responseEntity = restTemplate.getForEntity(url, ListarDeputado.class);
-		ListarDeputado responseBody = responseEntity.getBody();
+	public DeputadoService getDados() {
+		ResponseEntity<DeputadoService> responseEntity = restTemplate.getForEntity(url, DeputadoService.class);
+		DeputadoService responseBody = responseEntity.getBody();
 		
 		return responseBody;
 	}
