@@ -39,7 +39,7 @@
 					th:action="${'/deputado/' + {deputado.id} + '/eventos' + '/cadastrar'}"
 				>
 					<h3>Selecione um evento</h3>
-					<select>
+					<select name="evento">
 						<option
 							th:each="item : ${eventos}"
 							th:value="${item.id}"

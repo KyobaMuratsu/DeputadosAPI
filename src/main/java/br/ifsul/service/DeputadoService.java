@@ -12,6 +12,7 @@ import br.ifsul.entity.Deputado;
 import br.ifsul.entity.Evento;
 import br.ifsul.entity.valueobjects.ListaDeputado;
 import br.ifsul.repository.DeputadoRepository;
+import br.ifsul.repository.EventoRepository;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -24,6 +25,9 @@ public class DeputadoService {
 	
 	@Autowired
 	private DeputadoRepository deputadoRepo;
+
+	@Autowired
+	private EventoRepository eventoRepo;
 	
 	@Autowired
 	private RestTemplate restTemplate;
@@ -43,8 +47,10 @@ public class DeputadoService {
 		return deputadoRepo.findEventoById(id);
 	}
 	
-	public void cadastrarDeputadoEvento(Long id, Evento evento) {
+	public void cadastrarDeputadoEvento(Long id, Long eventoId) {
 		Deputado deputados = deputadoRepo.findDeputadoById(id);
+		Evento evento = eventoRepo.findById(eventoId).get();
+
 		deputados.getEvento().add(evento);
 		deputadoRepo.save(deputados);
 	}

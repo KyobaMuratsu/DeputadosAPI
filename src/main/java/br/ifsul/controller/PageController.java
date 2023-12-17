@@ -1,22 +1,21 @@
 package br.ifsul.controller;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import br.ifsul.entity.Deputado;
 import br.ifsul.entity.Evento;
 import br.ifsul.entity.valueobjects.ListaDeputado;
 import br.ifsul.entity.valueobjects.ListaEvento;
-import br.ifsul.repository.DeputadoRepository;
+import br.ifsul.gambis.EventoCadastro;
 import br.ifsul.service.DeputadoService;
 import br.ifsul.service.EventoService;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.websocket.server.PathParam;
 
 @Controller
 public class PageController {
@@ -50,7 +49,7 @@ public class PageController {
     }
 
     @GetMapping("/deputado/{id}/eventos/cadastrar")
-    public String cadastraremevento(@PathVariable Long id, HttpServletRequest request) {
+    public String cadastraremeventotela(@PathVariable Long id, HttpServletRequest request) {
         Optional<Deputado> deputadoOptional = deputadoService.getDeputado(id);
         ListaEvento eventos = eventoService.getEventoDados();
         
@@ -66,4 +65,12 @@ public class PageController {
         return "cadastraremevento";
     }
 
+    @PostMapping("/deputado/{id}/eventos/cadastrar")
+    public String cadastraremevento(EventoCadastro cadastro, HttpServletRequest request) {
+        // System.out.println(cadastro.getId());
+        
+        deputadoService.cadastrarDeputadoEvento(cadastro.getId(), cadastro.getEvento().getId());
+
+        return "redirect:/deputado/" + cadastro.getId();
+    }
 }
