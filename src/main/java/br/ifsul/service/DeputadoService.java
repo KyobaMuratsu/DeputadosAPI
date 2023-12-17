@@ -11,6 +11,7 @@ import org.springframework.web.client.RestTemplate;
 
 import br.ifsul.entity.Deputado;
 import br.ifsul.entity.Evento;
+import br.ifsul.entity.valueobjects.EventoDto;
 import br.ifsul.entity.valueobjects.ListaDeputado;
 import br.ifsul.repository.DeputadoRepository;
 import br.ifsul.repository.EventoRepository;
@@ -23,6 +24,9 @@ import lombok.Setter;
 public class DeputadoService {
 	
 	private final String url = "https://dadosabertos.camara.leg.br/api/v2/deputados?nome= &ordem=ASC&ordenarPor=nome";
+	
+	@Autowired
+	private EventoRepository eventoRepo;
 	
 	@Autowired
 	private DeputadoRepository deputadoRepo;

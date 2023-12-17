@@ -41,6 +41,11 @@ public class EventoService {
 		return eventoRepo.findById(id);
 	}
 	
+	public void editarEvento(Long id, String descricao) {
+		Evento evento = eventoRepo.findEventoById(id);
+		evento.setDescricao(descricao);
+		eventoRepo.save(evento);
+	}
 	
 	
 	
