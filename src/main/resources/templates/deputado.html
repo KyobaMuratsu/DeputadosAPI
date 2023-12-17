@@ -16,13 +16,34 @@
 	</head>
 	<body>
 		<header>
-			<h1>Página Deputados</h1>
-			<p>AAAAAAAAAAAAAA</p>
+			<h1>Deputado</h1>
+			<button type="button" class="btn btn-light">
+				<a href="/inicio">Voltar para início</a>
+			</button>
 		</header>
-		<br />
-		<h2>Lista de Deputados</h2>
-		<main
-			class="d-flex flex-row align-itens-center justify-content-center"
-		></main>
+
+		<main>
+			<div class="card-deputado d-flex flex-row align-itens-center p-2">
+				<img th:src="${deputado.urlFoto}" style="width: 60px; height: 80px" />
+				<div class="dados">
+					<p th:text="${deputado.nome}" class="">Nome</p>
+					<p th:text="${deputado.siglaPartido}" class="">Partido</p>
+				</div>
+				<div class="d-flex flex-column">
+					<button type="button" class="btn btn-light">
+						<a th:href="${'/deputado/' + {deputado.id} + '/eventos'}">
+							Ver eventos
+						</a>
+					</button>
+					<button type="button" class="btn btn-light">
+						<a
+							th:href="${'/deputado/' + {deputado.id} + '/eventos' + '/cadastrar'}"
+						>
+							Cadastrar em evento
+						</a>
+					</button>
+				</div>
+			</div>
+		</main>
 	</body>
 </html>

@@ -30,9 +30,15 @@ public class PageController {
 
     @GetMapping("/deputado/{id}")
     public String deputado(@PathVariable Long id, HttpServletRequest request) {
-        Optional<Deputado> deputado = deputadoService.getDeputado(id); 
+        Optional<Deputado> deputadoOptional = deputadoService.getDeputado(id);
 
-        request.setAttribute("deputados", deputado);
+        if (deputadoOptional.isEmpty()) {
+            return "redirect:/inicio";
+        }
+
+        Deputado deputado = deputadoOptional.get(); 
+
+        request.setAttribute("deputado", deputado);
         // dados.addObject("deputados", listaDeputados);
         return "deputado";
     }
