@@ -2,6 +2,7 @@ package br.ifsul.service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -38,12 +39,16 @@ public class DeputadoService {
 		
 		return responseBody;
 	}
+
+	public List<Deputado> getDeputadosBase() {
+		return deputadoRepo.findAll();
+	}
 	
 	public Optional<Deputado> getDeputado(Long id) {
 		return deputadoRepo.findById(id);
 	}
 	
-	public List<Evento> getEventoByDeputadoId(Long id){
+	public Set<Evento> getEventoByDeputadoId(Long id){
 		return deputadoRepo.findEventoById(id);
 	}
 	
@@ -55,9 +60,9 @@ public class DeputadoService {
 		deputadoRepo.save(deputados);
 	}
 	
-	public void excluirEventoDeputado(Long id, Evento evento) {
+	public void excluirEventoDeputado(Long id, Long eventoId) {
 		Deputado deputados = deputadoRepo.findDeputadoById(id);
-		deputados.getEvento().remove(evento);
+		deputados.getEvento().removeIf(x -> x.getId().equals(eventoId));
 		deputadoRepo.save(deputados);
 	}
 	

@@ -20,30 +20,64 @@
 			<button type="button" class="btn btn-light">
 				<a href="/inicio">Voltar para início</a>
 			</button>
-		</header>
-
-		<main>
 			<div class="card-deputado d-flex flex-row align-itens-center p-2">
 				<img th:src="${deputado.urlFoto}" style="width: 60px; height: 80px" />
 				<div class="dados">
 					<p th:text="${deputado.nome}" class="">Nome</p>
 					<p th:text="${deputado.siglaPartido}" class="">Partido</p>
 				</div>
-				<div class="d-flex flex-column">
-					<button type="button" class="btn btn-light">
-						<a th:href="${'/deputado/' + {deputado.id} + '/eventos'}">
-							Ver eventos
-						</a>
-					</button>
-					<button type="button" class="btn btn-light">
-						<a
-							th:href="${'/deputado/' + {deputado.id} + '/eventos' + '/cadastrar'}"
-						>
-							Cadastrar em evento
-						</a>
-					</button>
-				</div>
 			</div>
-		</main>
+		</header>
+
+        <main class="d-flex flex-row align-itens-center justify-content-center">
+            <table>
+                    <th>
+                        ID
+                    </th>
+                    <th>
+                        Descrição
+                    </th>
+                    <th>
+                        Tipo
+                    </th>
+                    <th>
+                        Início
+                    </th>
+                    <th>
+                        Fim
+                    </th>
+                    <th>
+                        Editar
+                    </th>
+					<th>
+                        Excluir
+                    </th>
+                </thead>
+    
+                <tbody>
+                    <tr data-th-each="item : ${eventos}">
+                        <td th:text="${item.id}">...</td>
+                        <td th:text="${item.descricao}">...</td>
+                        <td th:text="${item.descricaoTipo}">...</td>
+                        <td th:text="${item.dataHoraInicio}">...</td>
+                        <td th:text="${item.dataHoraFim}">...</td>
+                        <td>
+							<form>
+								<button type="button" class="btn btn-light">
+									<a href="/inicio">Editar</a>
+								</button>
+							</form>
+						</td>
+                        <td>
+							<form method="POST" th:action="${'/deputado/' + {deputado.id} + '/eventos/' + {item.id} + '/excluir'}">
+								<button type="submit" class="btn btn-danger">
+									Excluir
+								</button>
+							</form>
+						</td>
+                    </tr>
+                </tbody>
+            </table>
+        </main>
 	</body>
 </html>

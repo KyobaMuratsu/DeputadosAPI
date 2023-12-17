@@ -1,6 +1,9 @@
 package br.ifsul.controller;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,8 +30,8 @@ public class PageController {
     
     @GetMapping("/inicio")
     public String inicio(HttpServletRequest request) {
-        ListaDeputado listaDeputados = deputadoService.getDeputadosDados();
-        request.setAttribute("deputados", listaDeputados.getDados());
+        List<Deputado> listaDeputados = deputadoService.getDeputadosBase();
+        request.setAttribute("deputados", listaDeputados);
         // dados.addObject("deputados", listaDeputados);
         return "inicio";
     }
@@ -72,5 +75,30 @@ public class PageController {
         deputadoService.cadastrarDeputadoEvento(cadastro.getId(), cadastro.getEvento().getId());
 
         return "redirect:/deputado/" + cadastro.getId();
+    }
+
+    @GetMapping("/deputado/{id}/eventos")
+    public String deputadoeventos(@PathVariable Long id, HttpServletRequest request) {
+        Optional<Deputado> deputadoOptional = deputadoService.getDeputado(id);
+        
+        if (deputadoOptional.isEmpty()) {
+            return "redirect:/inicio";
+        }
+        
+        Deputado deputado = deputadoOptional.get(); 
+        Set<Evento> eventos = deputado.getEvento();
+        List<Evento> eventosList = new ArrayList<>(eventos);
+        
+        request.setAttribute("deputado", deputado);
+        request.setAttribute("eventos", eventosList);
+        // dados.addObject("deputados", listaDeputados);
+        return "deputadoeventos";
+    }
+
+    @PostMapping("/deputado/{id}/eventos/{eventoId}/excluir")
+    public String excluirevento(@PathVariable Long id, @PathVariable Long eventoId, HttpServletRequest request) {
+        deputadoService.excluirEventoDeputado(id, eventoId);
+
+        return "redirect:/deputado/" + id + "/eventos";
     }
 }
