@@ -64,7 +64,7 @@
                         <td>
 							<form>
 								<button type="button" class="btn btn-light">
-									<a href="/inicio">Editar</a>
+									<a th:href="${'/deputado/' + {deputado.id} + '/eventos/' + {item.id} + '/editar'}">Editar</a>
 								</button>
 							</form>
 						</td>

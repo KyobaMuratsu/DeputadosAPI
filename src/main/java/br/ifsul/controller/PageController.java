@@ -101,4 +101,28 @@ public class PageController {
 
         return "redirect:/deputado/" + id + "/eventos";
     }
+
+    @GetMapping("/deputado/{id}/eventos/{eventoId}/editar")
+    public String editarEvento(@PathVariable Long id, @PathVariable Long eventoId, HttpServletRequest request) {
+        Optional<Deputado> deputadoOptional = deputadoService.getDeputado(id);
+        
+        if (deputadoOptional.isEmpty()) {
+            return "redirect:/inicio";
+        }
+        
+        Deputado deputado = deputadoOptional.get(); 
+        Evento evento = eventoService.getEvento(eventoId).get();
+
+        request.setAttribute("deputado", deputado);
+        request.setAttribute("evento", evento);
+        // dados.addObject("deputados", listaDeputados);
+        return "editarevento";
+    }
+
+    @PostMapping("/deputado/{id}/eventos/{eventoId}/editar")
+    public String editarEventoPost(@PathVariable Long id, @PathVariable Long eventoId, String descricao, HttpServletRequest request) {
+        eventoService.editarEvento(eventoId, descricao);
+
+        return "redirect:/deputado/" + id + "/eventos";
+    }
 }
