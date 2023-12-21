@@ -10,6 +10,7 @@ import org.springframework.web.client.RestTemplate;
 
 import br.ifsul.entity.Deputado;
 import br.ifsul.entity.Evento;
+import br.ifsul.entity.valueobjects.EventoDto;
 import br.ifsul.entity.valueobjects.ListaDeputado;
 import br.ifsul.entity.valueobjects.ListaEvento;
 import br.ifsul.repository.DeputadoRepository;
@@ -41,9 +42,12 @@ public class EventoService {
 		return eventoRepo.findById(id);
 	}
 	
-	public void editarEvento(Long id, String descricao) {
+	public void editarEvento(Long id, EventoDto eventodto) {
 		Evento evento = eventoRepo.findEventoById(id);
-		evento.setDescricao(descricao);
+		evento.setDescricao(eventodto.getDescricao());
+		evento.setDataHoraFim(eventodto.getDataHoraFim());
+		evento.setDataHoraInicio(eventodto.getDataHoraInicio());
+		evento.setDescricaoTipo(eventodto.getDescricaoTipo());
 		eventoRepo.save(evento);
 	}
 	

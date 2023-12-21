@@ -10,10 +10,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 
 import br.ifsul.entity.Deputado;
 import br.ifsul.entity.Evento;
-import br.ifsul.entity.valueobjects.ListaDeputado;
+import br.ifsul.entity.valueobjects.EventoDto;
 import br.ifsul.entity.valueobjects.ListaEvento;
 import br.ifsul.gambis.EventoCadastro;
 import br.ifsul.service.DeputadoService;
@@ -101,4 +102,19 @@ public class PageController {
 
         return "redirect:/deputado/" + id + "/eventos";
     }
+    
+    @GetMapping("/deputado/{id}/eventos/{eventoId}/editar")
+    public String editareventotela(@PathVariable Long id, @PathVariable Long eventoId, HttpServletRequest request) {
+       
+        return "editarevento";
+    }
+    
+    @PostMapping("/deputado/{id}/eventos/{eventoId}/editar")
+    public String editarevento(@PathVariable Long id, @PathVariable Long eventoId, EventoDto evendto, HttpServletRequest request) {
+       eventoService.editarEvento(eventoId, evendto);
+       
+        return "redirect:/deputado/" + id + "/eventos";
+    }
+    
+    
 }

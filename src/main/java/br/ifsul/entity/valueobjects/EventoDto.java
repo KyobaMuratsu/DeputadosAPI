@@ -12,10 +12,8 @@ import lombok.Setter;
 @Builder
 public class EventoDto {
 
-	private String uri;
 	private LocalDateTime dataHoraInicio;
 	private LocalDateTime dataHoraFim;
-	private String situacao;
 	private String descricaoTipo;
 	@Column(columnDefinition = "VARCHAR(2000)")
 	private String descricao;

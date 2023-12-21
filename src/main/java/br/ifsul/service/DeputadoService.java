@@ -30,9 +30,6 @@ public class DeputadoService {
 	
 	@Autowired
 	private DeputadoRepository deputadoRepo;
-
-	@Autowired
-	private EventoRepository eventoRepo;
 	
 	@Autowired
 	private RestTemplate restTemplate;
